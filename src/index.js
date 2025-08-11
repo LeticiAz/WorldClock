@@ -23,7 +23,10 @@ function updateWorldClock() {
 
 function updateCity(event) {
     let cityTimeZone = event.target.value;
-    let cityName = event.target.options[event.target.selectedIndex].text;
+    if (cityTimeZone === 'current') {
+        cityTimeZone = moment.tz.guess();
+    };
+    let cityName = cityTimeZone.replace("_", " ").split("/")[1];
     let cityDate = moment().tz(cityTimeZone);
 
     let citiesElement = document.getElementById('cities');
